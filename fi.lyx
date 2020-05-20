@@ -1,0 +1,1043 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% Added by lyx2lyx
+\renewcommand{\textendash}{--}
+\renewcommand{\textemdash}{---}
+\usepackage{braket}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Infection delays
+\end_layout
+
+\begin_layout Standard
+\noindent
+In the current covid-19 pandemic, people are interested in projecting forward
+ in time to assess the efficacy of various techniques to control, or even
+ better eliminate, the infection.
+ The simplest models tend to be dominated by exponential behaviour, where
+ the infected population tomorrow is related to today's infection by (roughly)
+ a constant factor.
+ If the factor is greater than 1, the infection grows; less than 1, the
+ infection is fading, and happiness breaks out across the land.
+ We come out of our prison blocks, blinking and shading our eyes from the
+ sun.
+\end_layout
+
+\begin_layout Standard
+Of course, the infection numbers tomorrow aren't simply related to what
+ is happening today: in the case of covid-19 the infection takes up to two
+ weeks to manifest, if at all in some cases.
+ How come a simple constant factor works?
+\end_layout
+
+\begin_layout Standard
+A reasonably simple model for infection delay (i.e.
+ what has crossed what passes for my mind) would have today's newly infected
+ population to be a function of the newly infected populations on previous
+ days.
+ To make life extra simple, we also use a linear function - a sum of the
+ previous populations multiplied by various constant factors:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{0}=g_{1}I_{-1}+g_{2}I_{-2}+g_{3}I_{-3}+\ldots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using fancy maths notation, with the Greek capital sigma character (Σ) indicatin
+g a sum between limits, with D being the length of time the infection lasts
+ in the average person (or at least stops creating new infections):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{0}=\stackrel[_{d=1}]{_{D}}{\sum}g_{d}I_{-d}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tomorrow's new infections would then be expected to be:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{1}=g_{1}I_{0}+g_{2}I_{-1}+g_{3}I_{-2}+\ldots=\stackrel[_{d=1}]{_{D}}{\sum}g_{d}I_{-d+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And on day n:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{n}=g_{1}I_{n-1}+g_{2}I_{n-2}+g_{3}I_{n-3}+\ldots=\stackrel[_{d=1}]{_{D}}{\sum}g_{d}I_{n-d}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are known to be a number of (characteristic) solutions of these equations
+ that have a simple power form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{n}=a^{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This only works for specific values of 
+\shape italic
+a
+\shape default
+.
+ To find these values we pop the proposed solution into one of the equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a^{n}=g_{1}a^{n-1}+g_{2}a^{n-2}+g_{3}a^{n-3}+\ldots+g_{D}a^{n-D}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we divide through by 
+\shape italic
+
+\begin_inset Formula $a^{n-D}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a^{D}=g_{1}a^{D-1}+g_{2}a^{D-2}+g_{3}a^{D-3}+\ldots+g_{D}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is a 
+\shape italic
+D
+\shape default
+-order polynomial.
+ Note that 
+\shape italic
+n
+\shape default
+ has dropped out, since it is not really relevant (and shouldn't be, that's
+ the point) to the value of 
+\shape italic
+a
+\shape default
+.
+ In theory, this equation can have up to 
+\shape italic
+D
+\shape default
+ solutions.
+ Allowing complex number solutions, there are exactly D solutions, possibly
+ including multiple roots.
+\end_layout
+
+\begin_layout Section*
+Examples
+\end_layout
+
+\begin_layout Subsection*
+Two-day infection
+\end_layout
+
+\begin_layout Standard
+Let's imagine the simplest non-trivial example - a 2-day infection: you,
+ M.
+ Average, pick up a mild cold virus at the supermarket, go around for a
+ couple of days unaware that you are sub-par, then sniffles strike and you
+ stay home and hopefully beat off the virus in short order.
+ On the first day after the supermarketing you infect 0.25 of a person (as
+ M.
+ Average); day two comes, and, with the virus settled in and happily reproducing
+ wildly, you infect 1.5 people.
+ This would give:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{n}=0.25I_{n-1}+1.5I_{n-2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The characteristic polynomial is then a quadratic:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a^{2}=0.25a+1.5
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is satisfied by real 
+\shape italic
+a
+\shape default
+ values of about 1.36 and -1.11 (more accurate values in spreadsheet):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename character.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's imagine the cold virus initially infected one person on day 0, 
+\begin_inset Quotes eld
+\end_inset
+
+patient zero
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Before that the infection was at zero (it didn't exist).
+ On day 1, there is a quarter (0.25) of a person newly infected.
+ On day 2, the newly infected are 0.25×0.25+1.5×1, or approximately 1.56.
+ And so on.
+ I have put this into a spreadsheet, and used the graph features to produce
+ the following images with new infections plotted on linear and logarithmic
+ scales:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 2dlin.png
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename 2dlog.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We note that the logarithmic image shows initial wobbling, but eventually
+ tends to a straight line.
+ In the spreadsheet there is an additional 
+\begin_inset Quotes eld
+\end_inset
+
+Factor
+\begin_inset Quotes erd
+\end_inset
+
+ column where I have taken the ratio of new infections for 
+\begin_inset Quotes eld
+\end_inset
+
+today
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+yesterday
+\begin_inset Quotes erd
+\end_inset
+
+.
+ I have created a graph of this too:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 2dfor.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If you look at the values in the spreadsheet, the factor tends to 1.36 approximat
+ely.
+ Assuming that you aren't a proverbial goldfish, you may remember above
+ that one of the solutions of the characteristic equation was 1.36.
+ This not an accident - the solution with the largest absolute value tends
+ to dominate, given sufficient time (after about 20 days, in this case).
+ So once the infection has set in, one can model the behavior as a simple
+ exponential.
+\end_layout
+
+\begin_layout Standard
+What does the other solution represent? We will show that it gives the wobbles
+ in the initial stages of the infection.
+ In fact we try a solution:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{n}=A(1.36)^{n}+B(-1.11)^{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On day 0, we have:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+1=A(1.36)^{0}+B(-1.11)^{0}=A+B
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Day 1:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+0.25=A(1.36)^{1}+B(-1.11)^{1}=1.36A-1.11B
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is enough for us to solve for 
+\shape italic
+A
+\shape default
+ and 
+\shape italic
+B
+\shape default
+, giving roughly 0.55 and 0.45, respectively.
+ Since these are only accurate to two significant figures the deviation
+ from the true solution is quite rapid:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Day
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+New infections (I
+\begin_inset script subscript
+
+\begin_layout Plain Layout
+n
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I
+\begin_inset script subscript
+
+\begin_layout Plain Layout
+n
+\end_layout
+
+\end_inset
+
+ prediction
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2485
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.5625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.571725
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.765625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.76806685
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.53515625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.5646927725
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.7822265625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.800646909885
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.248291015625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.32182193683725
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.73541259765625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.79871205937171
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.30628967285156
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.47390041069244
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.42969131469727
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.60301082750063
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.8168573379517
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.1833527668565
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As the process repeats, the rounding errors become more and more severe.
+ If one is minded, one can increase the precision of the arithmetic, and
+ the solution of the sum of two powers multiplied by factors becomes exact
+ in the limit of infinite precision.
+ A better comparison is available in the spreadsheet.
+\end_layout
+
+\begin_layout Standard
+With a more extended infection period, more solutions need to be added to
+ give the initial wobbles.
+ If there are D different roots of the characteristic equation, then you
+ can again 
+\begin_inset Quotes eld
+\end_inset
+
+solve
+\begin_inset Quotes erd
+\end_inset
+
+ the progression with sums of powers that fits an initial infection pattern
+ spread over D days.
+ If some of the roots are multiple, the solution becomes more complicated,
+ but not intractible.
+ In real life, other factors come into play, such as the gathering of data
+ being sporadic, hampered by political considerations, butt covering, and
+ so on.
+ One is then largely restricted to, hopefully intelligent, guesswork.
+\end_layout
+
+\begin_layout Standard
+Being a bit bonkers, I decided to run the prediction backwards in time (
+\shape italic
+I
+\shape default
+
+\begin_inset script subscript
+
+\begin_layout Plain Layout
+
+\shape italic
+-n
+\end_layout
+
+\end_inset
+
+) on the spreadsheet with the related factor column gives the reduction
+ factor going backwards in time (-
+\shape italic
+n
+\shape default
+).
+ We note that this tends to -1.11, the other solution of the characteristic
+ polynomial.
+ As far as it can (the solution is effectively zero at this point), it 
+\begin_inset Quotes eld
+\end_inset
+
+dominates
+\begin_inset Quotes erd
+\end_inset
+
+ the negative time behaviour:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 2dback.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Three-day infection
+\end_layout
+
+\begin_layout Standard
+As the infection period extends, life gets more complicated since we don't
+ have simple solutions like the quadratics we learned in school.
+ For cubics and quartics (up to fourth power), there are non-obvious solutions,
+ which seem to have been found more by luck than judgement during the Italian
+ Renaissance, and kept secret for a time, giving advantage to the knowers
+ in maths competitions.
+ Quintics (fifth power) and beyond don't even have a general solution, as
+ shown by Galois before dying in a duel.
+ These equations can be treated numerically, which is how we will treat
+ a three-day example, although in principle one could find a solution.
+ I studied:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{n}=0.25I_{n-1}+0.75I_{n-2}+I_{n-3}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+giving a characteristic:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a^{3}=0.25a^{2}+0.75a+1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename c3.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As it happens, the real solution is about 1.35.
+ There are also two complex solutions, roughly -0.55±0.66i.
+ The absolute value of the complex solutions is about 0.86, less than the
+ real solution.
+ Having absolute values less than 1, means the complex solutions are damped,
+ tending to zero.
+ I initially tried working wholly on a spreadsheet, but in this case a python
+ 3 script (below, as a txt file, since this site prohibits py files) enabled
+ me to match the sum of powers predicition to the recurrence calculation.
+ The script references scipy/numpy modules that you might need to install
+ using pip3 or whatever.
+ The script is also adaptable to work out the characteristic solutions for
+ longer infection periods.
+ The output is a csv file with the brute force calculation and a 
+\begin_inset Quotes eld
+\end_inset
+
+patient zero
+\begin_inset Quotes erd
+\end_inset
+
+ fit to the characteristic solutions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 3dfor.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The backwards behaviour (retrodiction), also included, is even more bonkers
+ since the two complex solutions play off each other, giving oscillations
+ with a growing amplitude.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 3dback.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is better understood by putting the various complex bits in polar form.
+ The real characteristic solution is damped in the backward direction.
+ A simple-minded yesterday/today ratio comparison is not much use for relating
+ the behavior to the these roots.
+ In the context of infections, the negative time solution is of little practical
+ interest, since it didn't exist before 
+\begin_inset Quotes eld
+\end_inset
+
+patient zero
+\begin_inset Quotes erd
+\end_inset
+
+, who is assumed to come from nothing (or 
+\shape italic
+ex nihilo
+\shape default
+, as Boris Johnson would say).
+\end_layout
+
+\end_body
+\end_document
